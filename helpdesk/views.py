@@ -187,7 +187,7 @@ def home(request):
 @login_required(login_url='login_options')
 def ticket(request, pk):
     ticket = Ticket.objects.get(id=pk)
-    ticket_comments = ticket.comment_set.all()
+    ticket_comments = ticket.comment_ticket.all()
     contributors = ticket.contributors.all()
     comment_count = ticket_comments.count()
 
@@ -217,8 +217,8 @@ def ticket(request, pk):
 @login_required(login_url='staff_login')
 def user_profile(request, pk):
     user = CustomUser.objects.get(id=pk)
-    tickets = user.ticket_set.all()
-    ticket_comments = user.comment_set.all()
+    tickets = Ticket.objects.filter(creator=pk)
+    ticket_comments = Comment.objects.filter(user=pk)
     tickets_count = tickets.count()
     subjects = Subject.objects.all()[0:6]
 

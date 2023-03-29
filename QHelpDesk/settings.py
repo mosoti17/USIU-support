@@ -106,9 +106,9 @@ WSGI_APPLICATION = 'QHelpDesk.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-       'NAME': 'usiu_support',
+        'NAME': 'usiu_support',
         'USER': 'root',
-        'PASSWORD': 'usiu@123',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
         'PORT': '3306',
     }
