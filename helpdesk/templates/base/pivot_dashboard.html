@@ -15,25 +15,45 @@
 <body>
     <div id="pivot-container" data-url="pivot_dashboard"></div>
     
-    <script type="text/javascript">
-        var jsonData = "{{jsonData|safe}}";
-     
-        console.log(jsonData)
+    <script>
+        let jsonData = JSON.parse('{{ json_data|escapejs }}');
+        console.log(jsonData);
+  
         let pivot = new Flexmonster({
             container: "pivot-container",
             componentFolder: "https://cdn.flexmonster.com/",
             licenseKey: "Z75G-XA465E-44081E-0J1J59",
-            width: "100%",
-            height: 550,
             toolbar: true,
             report: {
                 dataSource: {
-                    // filename: "https://cdn.flexmonster.com/data/data.json"
-                    //filename: "{% static 'salaries-by-college-major.csv' %}"
-                    data: jsonData
+                type: "json",
+                data: jsonData,
+                },
+                slice: {
+                rows: [
+                    { uniqueName: "created" }
+                ],
+                measures: [
+                    { uniqueName: "fields.pk", aggregation: "count" }
+                ],
+                filters: [
+                    {
+                        uniqueName: "is_open",
+                        filter: {
+                        members: ["1"]
+                        }
+                    },
+                    {
+                        uniqueName: "is_in_progress",
+                        filter: {
+                        members: ["1"]
+                        }
+                    }
+                    ]
                 }
             }
         });
+
     </script>
 </body>
 </html>

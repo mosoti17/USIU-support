@@ -454,32 +454,31 @@ def pivot_dashboard(request):
 
 
 def pivot_data(request):
-    dataset = Ticket.objects.all()
-    data = serializers.serialize('json', dataset)
-    # return JsonResponse(data, safe=False)
+    # tickets = Ticket.objects.all()
+    # my_objects_json = serializers.serialize('json', tickets)
+    # json_data = json.dumps(my_objects_json)
+    # context = {'json_data': json_data}
 
-    # # Initialize PyWebDataRocks pivot table package
-    # webdatarocks_instance = webdatarocks.Pivot()
+    with connection.cursor() as cursor:
+        cursor.execute("SELECT * FROM helpdesk_ticket")
+        data = cursor.fetchall()
+        columns = [col[0] for col in cursor.description]
+    rows = []
+    for row in data:
+        rows.append(dict(zip(columns, row)))
+    # return JsonResponse(rows, safe=False)
 
-    # # Set the data source for the pivot table
-    # webdatarocks_instance.set_data_source({
-    # "dataSource": rows,
-    # "dataSourceType": "json",
-    # "filename": "yourfilename.json"
-    # })
+    # file_path = os.path.join(settings.STATIC_ROOT, 'salaries-by-college-major.csv')
 
-    # # Render the pivot table
-    # webdatarocks_instance.render()
+    # with open(file_path, 'w') as f:
+    #     json.dump(rows, f)
 
-
-    file_path = os.path.join(settings.STATIC_ROOT, 'salaries-by-college-major.csv')
-    # filepath = "QHelpDesk/json file/dbfile.json"
-    
-    with open(file_path, 'w') as f:
-        json.dump(data, f)
-
-        f.close()
-    return render(request, 'base/pivot_dashboard.html')
+    #     f.close()
+    print(rows)
+    json_data = json.dumps(rows, indent=4, sort_keys=True, default=str)
+    context = {'json_data': json_data}
+    print(context)
+    return render(request, 'base/pivot_dashboard.html',context)
 
     
 @login_required(login_url='staff_login')    
