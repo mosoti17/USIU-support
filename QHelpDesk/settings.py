@@ -106,11 +106,11 @@ WSGI_APPLICATION = 'QHelpDesk.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'qcell_support_database',
+        'NAME': 'usiu_support',
         'USER': 'root',
-        'PASSWORD': 'mysqlqcellsl@123',
+        'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '3307',
     }
 }
 

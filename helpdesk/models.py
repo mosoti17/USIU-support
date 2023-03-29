@@ -7,7 +7,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy
 from ckeditor.fields import RichTextField
 from django.contrib.auth.backends import BaseBackend
-from django.contrib.auth.models import BaseUserManager, AbstractUser, AbstractBaseUser,  PermissionsMixin
+from django.contrib.auth.models import BaseUserManager, AbstractUser, AbstractBaseUser,  PermissionsMixin, Group, Permission
 
 
 # Create your models here.
@@ -98,6 +98,27 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     
     objects = CustomAccountManager()
     
+
+    groups = models.ManyToManyField(
+        Group,
+        verbose_name=("groups"),
+        blank=True,
+        help_text=(
+            "The groups this user belongs to. A user will get all permissions "
+            "granted to each of their groups."
+        ),
+        related_name="customuser_set",
+        related_query_name="customuser",
+    )
+
+    user_permissions = models.ManyToManyField(
+        Permission,
+        verbose_name=("user permissions"),
+        blank=True,
+        help_text=("Specific permissions for this user."),
+        related_name="customuser_set",
+        related_query_name="customuser",
+    )
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_name', 'first_name', 'other_name', 'password']
 

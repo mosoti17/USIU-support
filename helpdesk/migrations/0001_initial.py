@@ -75,11 +75,7 @@ class Migration(migrations.Migration):
             name='department',
             field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='helpdesk.department'),
         ),
-        migrations.AddField(
-            model_name='customuser',
-            name='user_permissions',
-            field=models.ManyToManyField(blank=True, related_name='my_users_permissions', to='auth.permission', verbose_name='user permissions'),
-        ),
+
         migrations.CreateModel(
             name='Comment',
             fields=[
