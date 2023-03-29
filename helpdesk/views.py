@@ -46,15 +46,16 @@ def staff_login_page(request):
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
 
-        user = authenticate(request, email=email, password=password)
-
         if email == "" and password == "":
             return HttpResponse("Please fill out email and password field.")
         elif email == "":
             return HttpResponse("Please fill out email field.")
         elif password == "":
             return HttpResponse("Please fill out password field.")
-        elif user is not None and user.is_staff:
+        
+        user = authenticate( email=email, password=password)
+        print( user)
+        if user is not None and user.is_staff:
             login(request, user)
             return redirect('home')
         else:
@@ -79,7 +80,7 @@ def student_login_page(request):
         email = request.POST.get('email').lower()
         password = request.POST.get('password')
 
-        user= authenticate(request, email=email, password=password)
+        user= authenticate( email=email, password=password)
 
         if email == "" and password == "":
             return HttpResponse("Please fill out email and password field.")

@@ -110,7 +110,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',
-        'PORT': '3307',
+        'PORT': '3306',
     }
 }
 
@@ -179,7 +179,11 @@ CORS_ALLOW_ALL_ORIGINS = True
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 SESSION_COOKIE_NAME = 'session_cookie'
 
-# AUTHENTICATION_BACKENDS = 'django.contrib.auth.backends.ModelBackend'
+#AUTHENTICATION_BACKENDS = 'django.contrib.auth.backends.ModelBackend'
+AUTHENTICATION_BACKENDS = [    
+    'helpdesk.backends.CustomUserBackend',   
+    'django.contrib.auth.backends.ModelBackend',
+    ]
 
 
 # SMTP Configuration
