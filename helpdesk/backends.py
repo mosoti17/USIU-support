@@ -12,6 +12,10 @@ class CustomUserBackend(ModelBackend):
             return user
 
         return None
+    
+    def login(self, request, user, **kwargs):
+        super().login(request, user, **kwargs)
+
 
     def get_user(self, user_id):
         try:
