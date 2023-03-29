@@ -36,7 +36,7 @@ urlpatterns = [
     path('activities/', views.activity_page, name='activities'),
 
     path('fetch_data/', views.fetch_data, name='fetch_data'),
-    path('pivot_data/', views.pivot_data, name='pivot_data'),
+    path('analyze/', views.pivot_data, name='pivot_data'),
     path('pivot_dashboard/', views.pivot_dashboard, name='pivot_dashboard'), 
     path('dashboard/', views.dashboard, name='dashboard'),
     
