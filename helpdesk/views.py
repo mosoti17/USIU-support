@@ -452,7 +452,7 @@ def dashboard(request):
 def pivot_dashboard(request):
     return render(request, 'base/pivot_dashboard.html')
 
-
+@login_required(login_url='login_options')
 def pivot_data(request):
     # tickets = Ticket.objects.all()
     # my_objects_json = serializers.serialize('json', tickets)
@@ -474,10 +474,8 @@ def pivot_data(request):
     #     json.dump(rows, f)
 
     #     f.close()
-    print(rows)
     json_data = json.dumps(rows, indent=4, sort_keys=True, default=str)
     context = {'json_data': json_data}
-    print(context)
     return render(request, 'base/pivot_dashboard.html',context)
 
     
