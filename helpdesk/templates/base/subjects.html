@@ -37,7 +37,7 @@
               </li>
               {% for subject in subjects %}
                 <li>
-                  <a href="{% url 'home' %}?query={{ subject.name }}">{{ subject.name }} <span>{{ subject.ticket_set.all.count }}</span></a>
+                  <a href="{% url 'home' %}?query={{ subject.name }}">{{ subject.name }} <span>{{ tickets.filter(subject=subject.id).count }}</span></a>
                 </li>
               {% endfor %}
             </ul>
@@ -46,3 +46,4 @@
       </div>
     </main>
 {% endblock content %}
+

@@ -148,7 +148,7 @@ def student_register_page(request):
                 user.is_student = True
                 user.is_active = True
                 user.save()
-                login(request, user)
+                login(request, user, backend='helpdesk.backends.CustomUserBackend')
                 return redirect('home')
     except Exception as e:
         return HttpResponse("Oops! An error occurred during student registration. " + e)
