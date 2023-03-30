@@ -28,7 +28,10 @@ from .forms import TicketForm, CommentForm, UserCreateForm, UserUpdateForm
 # Views
 
 def login_options(request):
-    return render(request, 'base/login_options.html')
+     if request.user.is_authenticated:
+        return redirect('home')
+     else:
+        return render(request, 'base/login_options.html')
 
 
 def staff_login_page(request):
