@@ -25,7 +25,7 @@
             <h3 class="dashboard-h3">Notifications</h3>
             <span class="notification-count">{{ open_ticket_count }}</span>
           </a>
-          <a title="Analytics" class="dashboard-a tablink" onclick="openPage('Analytics', this)">
+          <a title="Analytics" class="dashboard-a tablink" href="{% url 'pivot_data' %}" >
             <span class="material-symbols-sharp">insights</span>
             <h3 class="dashboard-h3">Analytics</h3>
           </a>
